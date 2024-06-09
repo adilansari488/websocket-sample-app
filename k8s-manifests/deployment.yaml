@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws-app-deployment
+  namespace: default
+  labels:
+    app: ws-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ws-app
+  template:
+    metadata:
+      labels:
+        app: ws-app
+    spec:
+      containers:
+        - name: ws-app
+          image: ws-app:latest
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 8819
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
