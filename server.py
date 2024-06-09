@@ -1,8 +1,11 @@
 import asyncio
 import websockets
 import logging
+import os
 
-log_file_path = "/temp/ws-server.log"
+log_file_path = "./ws-server.log"
+if not os.path.exists(os.path.dirname(log_file_path)):
+    os.makedirs(os.path.dirname(log_file_path))
 
 async def echo(websocket, path):
     # print("websocket all data is:", vars(websocket))
@@ -25,5 +28,10 @@ async def main():
     logging.info("Server started.")
     print("Server started.")  # Added print statement
     await server.wait_closed()
-
-asyncio.run(main())
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logging.info("Server stopped by keyboard interruption.")
+        print("Server stopped by keyboard interruption.")
+        exit(0)

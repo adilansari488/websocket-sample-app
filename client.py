@@ -14,5 +14,9 @@ async def hello():
             except websockets.exceptions.ConnectionClosedError:
                 print("Connection closed. Reconnecting...")
             await asyncio.sleep(1)
+if __name__ == "__main__":
+    try:
+        asyncio.run(hello())
+    except KeyboardInterrupt:
+        print("keyboard interrupt. Exiting...")
 
-asyncio.run(hello())

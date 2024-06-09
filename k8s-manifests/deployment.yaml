@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ws-app
-          image: ws-app:latest
+          image: adilansari488/websocket-app:latest
           imagePullPolicy: Always
           securityContext:
             privileged: true
